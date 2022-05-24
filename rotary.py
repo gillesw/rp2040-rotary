@@ -26,9 +26,10 @@ class Rotary:
         if new_status == self.last_status:
             return
         transition = (self.last_status << 2) | new_status
-        if transition == 0b1110:
+        #print(bin(transition))
+        if transition == 0b1110 or transition == 0b0111:
             micropython.schedule(self.call_handlers, Rotary.ROT_CW)
-        elif transition == 0b1101:
+        elif transition == 0b1101 or transition == 0b1011:
             micropython.schedule(self.call_handlers, Rotary.ROT_CCW)
         self.last_status = new_status
         
